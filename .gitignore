@@ -1,0 +1,20 @@
+# Build outputs
+/build/
+/dist/
+
+# NetBeans private user settings
+/nbproject/private/
+
+# Generated files
+/build/generated/
+/build/generated-sources/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

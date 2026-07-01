@@ -1,0 +1,210 @@
+<%@page import="models.CartShop"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="models.Users"%>
+
+<%
+    Users user = (Users) session.getAttribute("ttdn");
+    CartShop cart = (CartShop) session.getAttribute("cart");
+    int cartCount = 0;
+    if (cart != null) {
+        cartCount = cart.getTotalQuantity();
+    }
+%>
+
+<div class="topbar">
+    <div class="brand">
+        <a href="HomeController">Wine Store</a>
+        <img src="images/WineStore.png" alt="logo">
+    </div>
+    <% if (user != null && user.getIsAdmin()) { %>
+    <a class="login-btn" href="admin.jsp">Admin Page</a>
+    <% } %>
+
+    <div class="top-actions">
+        <form class="search-form" action="tim_ten" method="get">
+            <input type="text" name="word" placeholder="Wine name you want....">
+            <button type="submit">Search</button>
+        </form>
+
+        <%
+            if (user == null) {
+        %>
+        <a class="login-btn" href="login.jsp">Login</a>
+        <%
+        } else {
+        %>
+        <a class="logout-btn" href="dang_xuat">Logout</a>
+        <%
+            }
+        %>
+
+        <a class="cart-box" href="cart.jsp">
+            <img src="images/shopping cart.png" alt="">
+            <span class="cart-text">Shopping cart</span>
+            <span class="cart-count"><%= cartCount%></span>
+        </a>
+    </div>
+</div>
+
+<div class="banner">
+    <h1>Luxury Wine Collection</h1>
+    <p>Thưởng thức những dòng rượu tinh tế, đậm chất sang trọng</p>
+</div>
+
+<style>
+    .topbar {
+        background: #f8f4ee;
+        padding: 18px 30px;
+        border-bottom: 1px solid #e5d7c3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: Arial, sans-serif;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brand a {
+        text-decoration: none;
+        font-size: 26px;
+        font-weight: bold;
+        color: #8b5e3c;
+    }
+
+    .brand img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        border-radius: 12px;
+    }
+
+    .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-form input[type="text"] {
+        width: 360px;
+        padding: 12px 14px;
+        border: 1px solid #cdb79e;
+        border-radius: 8px 0 0 8px;
+        outline: none;
+        font-size: 16px;
+        background: #fffdf9;
+    }
+
+    .search-form button {
+        padding: 12px 18px;
+        border: none;
+        background: #2e1f1a;
+        color: white;
+        font-size: 16px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+    }
+
+    .search-form button:hover {
+        background: #4a2f28;
+    }
+
+    .login-btn, .logout-btn {
+        text-decoration: none;
+        padding: 11px 18px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .login-btn {
+        background: #7b1e3a;
+    }
+
+    .login-btn:hover {
+        background: #5f162d;
+    }
+
+    .logout-btn {
+        background: #9c6b30;
+    }
+
+    .logout-btn:hover {
+        background: #7d5524;
+    }
+
+    .cart-box {
+        position: relative;
+        border: 1px solid #b88b4a;
+        color: #8b5e3c;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        background: #fffaf3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+    }
+    .cart-box img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .cart-box:hover {
+        background: #f6ecdf;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: red;
+        color: white;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        text-align: center;
+        line-height: 22px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .banner {
+        margin: 20px auto;
+        width: 95%;
+        background: #efe5d4;
+        border-radius: 16px;
+        padding: 40px 20px;
+        text-align: center;
+        color: #8b5e3c;
+        font-family: Arial, sans-serif;
+    }
+
+    .banner h1 {
+        margin-bottom: 15px;
+        font-size: 24px;
+        color: #9c6b30;
+    }
+
+    .banner p {
+        font-size: 18px;
+        font-style: italic;
+        color: #6d4c41;
+    }
+
+</style>
